@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const Project = () => {
-  const isSmallScreen = window.innerWidth < 640; // You can set the breakpoint as per your needs.
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -22,20 +22,25 @@ const Project = () => {
       setFilterWork(data);
     });
   }, []);
+  useEffect(() => {
+    setIsSmallScreen(window.innerWidth < 640);
+  }, []);
   const HandleWorkFilter = (item) => {
-        setActiveFilter(item);
-        setAnimateCard([{ y: 100, opacity: 0 }]);
+    setActiveFilter(item);
+    setAnimateCard([{ y: 100, opacity: 0 }]);
 
-        setTimeout(() => {
-          setAnimateCard([{ y: 0, opacity: 1 }]);
+    setTimeout(() => {
+      setAnimateCard([{ y: 0, opacity: 1 }]);
 
-          if (item === "All") {
-            setFilterWork(works);
-          } else {
-            setFilterWork(works.filter((work) => work.tags.includes(item)));
-          }
-        }, 500);
+      if (item === "All") {
+        setFilterWork(works);
+      } else {
+        const filteredWorks = works.filter((work) => work.tags.includes(item));
+        setFilterWork(filteredWorks);
+      }
+    }, 500);
   };
+
   return (
     <section id="projects" className="md:mt-[400px] pt-24 lg:mt-[280px] md:py-32 ">
       <div className="flex justify-center gap-16 ">

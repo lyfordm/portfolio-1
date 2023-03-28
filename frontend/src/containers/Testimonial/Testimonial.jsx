@@ -28,7 +28,7 @@ const Testimonial = () => {
         </p>
       </div>
       <div className="mx-auto mb-7">
-        <p className="flex justify-center font-opensans sm:text-sm md:text-base lg:text-xl">
+        <p className="flex justify-center pt-2 font-opensans sm:text-sm md:text-base lg:text-xl">
           This is what people are saying about my work
         </p>
       </div>
